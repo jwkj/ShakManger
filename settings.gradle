@@ -1,0 +1,1 @@
+include ':app', ':shakmanger_lib'

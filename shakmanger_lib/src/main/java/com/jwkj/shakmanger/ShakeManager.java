@@ -30,6 +30,10 @@ public class ShakeManager {
      * 上一次与下一次搜索的间隔时间
      */
     private long searchDelay = 3000;
+    /**
+     * 有些定制商只希望搜到自己的设备id
+     */
+    private int[] iCustomer;
 
     private ShakeManager() {
     }
@@ -67,6 +71,21 @@ public class ShakeManager {
         return this;
     }
 
+    public int[] getiCustomer() {
+        return iCustomer;
+    }
+
+    /**
+     * 有些定制商只希望搜到自己的设备id.
+     * 如果没有此需求的不要设置任何值（不调用此方法即可）
+     *
+     * @param iCustomer
+     * @return
+     */
+    public ShakeManager setiCustomer(int[] iCustomer) {
+        this.iCustomer = iCustomer;
+        return this;
+    }
 
     /**
      * 开始扫描
@@ -76,6 +95,9 @@ public class ShakeManager {
     public void shaking(final ShakeListener listener) {
         this.listener = listener;
         ShakeData data = new ShakeData();
+        if (iCustomer != null && iCustomer.length > 0) {
+            data.setiCustomer(iCustomer);
+        }
         data.setCmd(ShakeData.Cmd.CMD_SHAKE_DEVICE);
         UDPSender.getInstance()
                 .setTargetPort(ShakeData.Cmd.CMD_SHAKE_DEVICE_DEFAULT_PORT)//设置目标端口

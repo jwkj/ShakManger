@@ -23,6 +23,7 @@ public class LocalDevice implements Serializable, Comparable<LocalDevice> {
      */
     private String name;
     /**
+     * @deprecated 固件版本已经不通过此字段返回了
      * 设备的版本
      */
     private int version;
@@ -31,6 +32,7 @@ public class LocalDevice implements Serializable, Comparable<LocalDevice> {
      */
     private int flag = 1;
     /**
+     * @deprecated 固件版本已经不通过此字段返回了
      * 固件版本信息
      */
     private int rtspflag;
@@ -58,8 +60,14 @@ public class LocalDevice implements Serializable, Comparable<LocalDevice> {
      * 本地p2p的ip地址
      */
     private int localP2PRes;
-
-
+    /**
+     * 客户id
+     */
+    private int customId = 0;
+    /**
+     * mac信息
+     */
+    private String mac;
 
     public LocalDevice() {
     }
@@ -88,10 +96,18 @@ public class LocalDevice implements Serializable, Comparable<LocalDevice> {
         this.name = name;
     }
 
+    /**
+     * @deprecated 固件版本已经不通过此字段返回了
+     * @return
+     */
     public String getVersion() {
         return "" + ((rtspflag >> 4) & 0x1);
     }
 
+    /**
+     * @deprecated 固件版本已经不通过此字段返回了
+     * @param version
+     */
     public void setVersion(int version) {
         this.version = version;
     }
@@ -112,11 +128,18 @@ public class LocalDevice implements Serializable, Comparable<LocalDevice> {
         this.type = type;
     }
 
-
+    /**
+     * @deprecated 固件版本已经不通过此字段返回了
+     * @return
+     */
     public int getRtspflag() {
         return (rtspflag >> 2) & 1;
     }
 
+    /**
+     * @deprecated 固件版本已经不通过此字段返回了
+     * @param rtspflag
+     */
     public void setRtspflag(int rtspflag) {
         this.rtspflag = rtspflag;
     }
@@ -161,6 +184,22 @@ public class LocalDevice implements Serializable, Comparable<LocalDevice> {
         this.subType = subType;
     }
 
+    public int getCustomId() {
+        return customId;
+    }
+
+    public void setCustomId(int customId) {
+        this.customId = customId;
+    }
+
+    public String getMac() {
+        return mac;
+    }
+
+    public void setMac(String mac) {
+        this.mac = mac;
+    }
+
     @Override
     public String toString() {
         return "LocalDevice{" +
@@ -176,6 +215,8 @@ public class LocalDevice implements Serializable, Comparable<LocalDevice> {
                 ", contactNewId=" + contactNewId +
                 ", localP2PPort=" + localP2PPort +
                 ", localP2PRes=" + localP2PRes +
+                ", customId=" + customId +
+                ", mac='" + mac + '\'' +
                 '}';
     }
 
